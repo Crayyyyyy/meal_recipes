@@ -20,7 +20,7 @@ class PageCategories extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Meal categories")),
       body: GridView(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 3 / 2,

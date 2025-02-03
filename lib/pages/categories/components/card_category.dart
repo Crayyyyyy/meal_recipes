@@ -17,6 +17,18 @@ class CardCategory extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black.withValues(alpha: 0.5),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.25),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            )
+          ],
           borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(colors: [
             category.color.withValues(alpha: 0.9),
@@ -25,7 +37,7 @@ class CardCategory extends StatelessWidget {
         ),
         child: Text(
           category.title,
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
       ),
     );

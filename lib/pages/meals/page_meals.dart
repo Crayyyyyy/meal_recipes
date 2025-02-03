@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meal_recipes/objects/category.dart';
 import 'package:meal_recipes/objects/meal.dart';
 import 'package:meal_recipes/data/data_dummy.dart';
+import 'package:meal_recipes/pages/meals/components/card_meal.dart';
 
 class PageMeals extends StatelessWidget {
   PageMeals({super.key, required this.category})
@@ -24,23 +25,6 @@ class PageMeals extends StatelessWidget {
           return CardMeal(meal: meals[index]);
         },
       ),
-    );
-  }
-}
-
-class CardMeal extends StatelessWidget {
-  CardMeal({super.key, required this.meal});
-
-  Meal meal;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.network(meal.imageUrl),
-      ],
     );
   }
 }
