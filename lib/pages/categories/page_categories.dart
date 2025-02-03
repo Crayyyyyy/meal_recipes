@@ -18,25 +18,92 @@ class PageCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Meal categories")),
-      body: GridView(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 3 / 2,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
+        body: CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          expandedHeight: MediaQuery.of(context).size.height / 2 - 100,
+          elevation: 5,
+          flexibleSpace: Stack(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: Image.asset(
+                  "assets/image-cover.png",
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 100,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                      Theme.of(context)
+                          .scaffoldBackgroundColor
+                          .withValues(alpha: 0.01),
+                      Theme.of(context)
+                          .scaffoldBackgroundColor
+                          .withValues(alpha: 0.4),
+                      Theme.of(context)
+                          .scaffoldBackgroundColor
+                          .withValues(alpha: 0.7),
+                      Theme.of(context)
+                          .scaffoldBackgroundColor
+                          .withValues(alpha: 1),
+                    ], stops: [
+                      0.0,
+                      0.2,
+                      0.5,
+                      1.0
+                    ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 15,
+                left: 0,
+                right: 0,
+                child: Text(
+                  "Meal Recipes",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+            ],
+          ),
         ),
-        children: [
-          for (Category cat in dummyCategories)
-            CardCategory(
-              category: cat,
-              parentRouteFunction: () {
-                _routeCategory(context, cat);
+        SliverPadding(
+          padding: EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: MediaQuery.of(context).padding.bottom + 20),
+          sliver: SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 3 / 2,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                final cat = dummyCategories[index];
+                return CardCategory(
+                  category: cat,
+                  parentRouteFunction: () {
+                    _routeCategory(context, cat);
+                  },
+                );
               },
-            )
-        ],
-      ),
-    );
+              childCount: dummyCategories.length,
+            ),
+          ),
+        ),
+      ],
+    ));
   }
 }
