@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meal_recipes/pages/categories/page_categories.dart';
+import 'package:meal_recipes/pages/filters/page_filters.dart';
 import 'package:meal_recipes/pages/tabs/page_tabs.dart';
 
 var kColorScheme = ColorScheme.fromSeed(seedColor: const Color(0xFF00ff00));

@@ -32,3 +32,7 @@ To get started with the Meal Recipes app, follow the instructions below:
     ```
 
 Enjoy exploring and cooking delicious meals with the Meal Recipes app!
+
+TO DOO:
+- Add an API to load the recipes from so this is solid project
+- Add a loading screen

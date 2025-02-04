@@ -6,15 +6,20 @@ import 'package:meal_recipes/pages/categories/components/card_category.dart';
 import 'package:meal_recipes/pages/meals/page_meals.dart';
 
 class PageCategories extends StatelessWidget {
-  PageCategories({super.key, required this.onToggleFavorite});
+  PageCategories(
+      {super.key, required this.onToggleFavorite, required this.filters});
 
   void Function(Meal meal) onToggleFavorite;
+  Map<String, bool> filters;
 
   void _routeCategory(BuildContext context, Category category) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) =>
-            PageMeals(category: category, onToggleFavorite: onToggleFavorite),
+        builder: (ctx) => PageMeals.withFilters(
+          category: category,
+          onToggleFavorite: onToggleFavorite,
+          filters: filters,
+        ),
       ),
     );
   }
@@ -24,12 +29,6 @@ class PageCategories extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
-          leading: IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
-          ),
           expandedHeight: MediaQuery.of(context).size.height / 2 - 100,
           elevation: 5,
           flexibleSpace: Stack(

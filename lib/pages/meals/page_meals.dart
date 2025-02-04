@@ -14,9 +14,30 @@ class PageMeals extends StatelessWidget {
   PageMeals.fromList(
       {super.key, required this.meals, required this.onToggleFavorite});
 
+  PageMeals.withFilters(
+      {super.key,
+      required this.category,
+      required this.onToggleFavorite,
+      required this.filters})
+      : meals = dummyMeals
+            .where((meal) => meal.categories.contains(category!.id))
+            .where((meal) {
+          if (filters!["Gluten-free"]! && !meal.isGlutenFree) return false;
+          if (filters!["Lactose-free"]! && !meal.isLactoseFree) return false;
+          if (filters!["Vegetarian"]! && !meal.isVegetarian) return false;
+          if (filters!["Vegan"]! && !meal.isVegan) return false;
+          return true;
+        }).toList();
+
+//  "Gluten-free": false,
+//     "Lactose-free": false,
+//     "Vegetarian": false,
+//     "Vegan": false,
+
   void Function(Meal meal) onToggleFavorite;
   Category? category;
   List<Meal> meals;
+  Map<String, bool>? filters;
 
   void _routeMeal(BuildContext context, Meal meal) {
     Navigator.of(context).push(

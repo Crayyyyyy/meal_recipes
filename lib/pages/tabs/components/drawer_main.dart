@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:meal_recipes/pages/filters/page_filters.dart';
 
 class DrawerMain extends StatelessWidget {
-  const DrawerMain({super.key});
+  DrawerMain({super.key, required this.parentRouteFunction});
+
+  void Function(BuildContext context) parentRouteFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -42,17 +45,6 @@ class DrawerMain extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(
-              Icons.restaurant,
-              color: Colors.white.withValues(alpha: 0.65),
-            ),
-            title: Text(
-              "Meals",
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(
               Icons.settings,
               color: Colors.white.withValues(alpha: 0.65),
             ),
@@ -60,7 +52,9 @@ class DrawerMain extends StatelessWidget {
               "Settings",
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-            onTap: () {},
+            onTap: () {
+              parentRouteFunction(context);
+            },
           ),
         ],
       ),
