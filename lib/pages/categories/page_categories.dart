@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:meal_recipes/data/data_dummy.dart';
 import 'package:meal_recipes/objects/category.dart';
+import 'package:meal_recipes/objects/meal.dart';
 import 'package:meal_recipes/pages/categories/components/card_category.dart';
 import 'package:meal_recipes/pages/meals/page_meals.dart';
 
 class PageCategories extends StatelessWidget {
-  const PageCategories({super.key});
+  PageCategories({super.key, required this.onToggleFavorite});
+
+  void Function(Meal meal) onToggleFavorite;
 
   void _routeCategory(BuildContext context, Category category) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => PageMeals(category: category),
+        builder: (ctx) =>
+            PageMeals(category: category, onToggleFavorite: onToggleFavorite),
       ),
     );
   }
@@ -68,7 +72,7 @@ class PageCategories extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: Text(
-                  "Meal Recipes",
+                  "Dishcovery",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),

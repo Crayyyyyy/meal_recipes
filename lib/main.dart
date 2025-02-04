@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meal_recipes/pages/categories/page_categories.dart';
+import 'package:meal_recipes/pages/tabs/page_tabs.dart';
 
 var kColorScheme = ColorScheme.fromSeed(seedColor: const Color(0xFF00ff00));
 
@@ -16,7 +17,7 @@ class RecipesApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Recipes app',
-      home: PageCategories(),
+      home: PageTabs(),
       theme: ThemeData().copyWith(
         textTheme: TextTheme(
           titleLarge: TextStyle(
@@ -27,26 +28,31 @@ class RecipesApp extends StatelessWidget {
             letterSpacing: 2,
             shadows: [
               Shadow(
-                offset: Offset(3.0, 3.0),
+                offset: Offset(1.5, 1.5),
                 blurRadius: 10.0,
                 color: Color.fromARGB(200, 0, 0, 0),
               ),
               Shadow(
-                offset: Offset(-3.0, 3.0),
+                offset: Offset(-1.5, 1.5),
                 blurRadius: 10.0,
                 color: Color.fromARGB(200, 0, 0, 0),
               ),
               Shadow(
-                offset: Offset(3.0, -3.0),
+                offset: Offset(1.5, -1.5),
                 blurRadius: 10.0,
                 color: Color.fromARGB(200, 0, 0, 0),
               ),
               Shadow(
-                offset: Offset(-3.0, -3.0),
+                offset: Offset(-1.5, -1.5),
                 blurRadius: 10.0,
                 color: Color.fromARGB(200, 0, 0, 0),
               ),
             ],
+          ),
+          titleMedium: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: kColorScheme.inversePrimary,
           ),
           bodySmall: TextStyle(
             color: Colors.white.withValues(alpha: 0.9),

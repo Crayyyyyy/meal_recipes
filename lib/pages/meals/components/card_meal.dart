@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:meal_recipes/components/meal_item_detail.dart';
 import 'package:meal_recipes/objects/meal.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class CardMeal extends StatelessWidget {
-  CardMeal({super.key, required this.meal});
+  CardMeal({super.key, required this.meal, required this.parentRouteFunction});
 
   Meal meal;
+  void Function() parentRouteFunction;
 
   String get complexityString {
     return meal.complexity.name[0].toUpperCase() +
@@ -28,7 +30,7 @@ class CardMeal extends StatelessWidget {
       elevation: 2,
       child: InkWell(
         splashColor: Theme.of(context).primaryColor,
-        onTap: () {},
+        onTap: parentRouteFunction,
         child: Stack(
           children: [
             FadeInImage(
@@ -81,31 +83,6 @@ class CardMeal extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class MealItemInfo extends StatelessWidget {
-  const MealItemInfo({super.key, required this.title, required this.icon});
-
-  final IconData icon;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          icon,
-          color: Colors.white.withValues(alpha: 0.6),
-          size: 20,
-        ),
-        SizedBox(width: 5),
-        Text(
-          title,
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-      ],
     );
   }
 }
