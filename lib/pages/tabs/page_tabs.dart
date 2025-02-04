@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meal_recipes/objects/meal.dart';
 import 'package:meal_recipes/pages/categories/page_categories.dart';
 import 'package:meal_recipes/pages/meals/page_meals.dart';
+import 'package:meal_recipes/pages/tabs/components/drawer_main.dart';
 
 class PageTabs extends StatefulWidget {
   const PageTabs({super.key});
@@ -36,13 +37,12 @@ class _PageTabsState extends State<PageTabs> {
   @override
   Widget build(BuildContext context) {
     Widget activePage = PageCategories(onToggleFavorite: toggleFavoriteMeal);
-
     if (indexPage == 1) {
       activePage = PageMeals.fromList(
           meals: favoriteMeals, onToggleFavorite: toggleFavoriteMeal);
     }
-
     return Scaffold(
+      drawer: DrawerMain(),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 2,
         onTap: _selectPage,

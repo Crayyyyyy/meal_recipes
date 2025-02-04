@@ -21,10 +21,15 @@ class PageCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: CustomScrollView(
+    return CustomScrollView(
       slivers: [
         SliverAppBar(
+          leading: IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
           expandedHeight: MediaQuery.of(context).size.height / 2 - 100,
           elevation: 5,
           flexibleSpace: Stack(
@@ -108,6 +113,6 @@ class PageCategories extends StatelessWidget {
           ),
         ),
       ],
-    ));
+    );
   }
 }
