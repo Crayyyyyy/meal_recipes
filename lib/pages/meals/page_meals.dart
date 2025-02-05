@@ -57,58 +57,43 @@ class PageMeals extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
+          iconTheme: Theme.of(context).appBarTheme.iconTheme!.copyWith(
+            shadows: [],
+          ),
           title: Text(category == null ? "Favorites" : category!.title),
         ),
         body: content);
   }
 }
 
-class EmptySearch extends StatefulWidget {
-  const EmptySearch({super.key});
-
-  @override
-  State<EmptySearch> createState() => _EmptySearchState();
-}
-
-class _EmptySearchState extends State<EmptySearch>
-    with SingleTickerProviderStateMixin {
+class EmptySearch extends StatelessWidget {
+  EmptySearch({super.key});
   late AnimationController _animationController;
 
   @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1000),
-      lowerBound: 0,
-      upperBound: 1,
-    );
-    _animationController.repeat();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _animationController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _animationController,
-      child: Container(
-        width: 200,
-        height: 300,
-        color: Colors.purpleAccent,
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.sentiment_neutral_sharp,
+            size: 72,
+            color: Colors.white.withValues(alpha: 0.25),
+          ),
+          Text(
+            "No meals were found here",
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          Text(
+              "Maybe there are no meals for this criteria\nor you need to add something.",
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Colors.white.withValues(alpha: 0.25),
+                  )),
+        ],
       ),
-      builder: (context, child) {
-        return SlideTransition(
-          position: Tween<Offset>(
-            begin: Offset(0, 0.3),
-            end: Offset(0, 0),
-          ).animate(_animationController),
-        );
-      },
     );
   }
 }

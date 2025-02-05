@@ -11,6 +11,9 @@ class PageFilters extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Filters"),
+        iconTheme: Theme.of(context).appBarTheme.iconTheme!.copyWith(
+          shadows: [],
+        ),
       ),
       body: Column(
         children: [

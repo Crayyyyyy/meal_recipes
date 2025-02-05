@@ -30,23 +30,23 @@ class RecipesApp extends StatelessWidget {
             letterSpacing: 2,
             shadows: [
               Shadow(
-                offset: Offset(1.5, 1.5),
-                blurRadius: 10.0,
+                offset: Offset(4, 4),
+                blurRadius: 13.0,
                 color: Color.fromARGB(200, 0, 0, 0),
               ),
               Shadow(
-                offset: Offset(-1.5, 1.5),
-                blurRadius: 10.0,
+                offset: Offset(-4, 4),
+                blurRadius: 13.0,
                 color: Color.fromARGB(200, 0, 0, 0),
               ),
               Shadow(
-                offset: Offset(1.5, -1.5),
-                blurRadius: 10.0,
+                offset: Offset(4, -4),
+                blurRadius: 13.0,
                 color: Color.fromARGB(200, 0, 0, 0),
               ),
               Shadow(
-                offset: Offset(-1.5, -1.5),
-                blurRadius: 10.0,
+                offset: Offset(-4, -4),
+                blurRadius: 13.0,
                 color: Color.fromARGB(200, 0, 0, 0),
               ),
             ],
@@ -76,6 +76,32 @@ class RecipesApp extends StatelessWidget {
           ),
         ),
         appBarTheme: AppBarTheme().copyWith(
+          iconTheme: IconThemeData().copyWith(
+            size: 32,
+            color: Colors.white,
+            shadows: [
+              Shadow(
+                offset: Offset(4, 4),
+                blurRadius: 13.0,
+                color: Color.fromARGB(200, 0, 0, 0),
+              ),
+              Shadow(
+                offset: Offset(-4, 4),
+                blurRadius: 13.0,
+                color: Color.fromARGB(200, 0, 0, 0),
+              ),
+              Shadow(
+                offset: Offset(4, -4),
+                blurRadius: 13.0,
+                color: Color.fromARGB(200, 0, 0, 0),
+              ),
+              Shadow(
+                offset: Offset(-4, -4),
+                blurRadius: 13.0,
+                color: Color.fromARGB(200, 0, 0, 0),
+              ),
+            ],
+          ),
           backgroundColor: kColorScheme.onSurfaceVariant,
           titleTextStyle: TextStyle().copyWith(
             color: kColorScheme.surfaceBright,

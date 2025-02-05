@@ -1,3 +1,11 @@
+<p align="center">
+    <img src="assets/readme/screen-filters.png" alt="Image 1" width="200"/>
+    <img src="assets/readme/screen-drawer.png" alt="Image 2" width="200"/>
+    <img src="assets/readme/screen-category.png" alt="Image 3" width="200"/>
+    <img src="assets/readme/screen-meal.png" alt="Image 4" width="200"/>
+    <img src="assets/readme/screen-meals.png" alt="Image 4" width="200"/>
+</p>
+
 # Meal Recipes Application
 
 This application is designed to help users discover and manage meal recipes. It leverages the Flutter framework to provide a seamless and responsive user experience across both iOS and Android platforms.
