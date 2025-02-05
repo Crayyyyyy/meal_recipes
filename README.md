@@ -1,38 +1,21 @@
-# Meal Recipes
+# Meal Recipes Application
 
-This repository aims to provide a comprehensive collection of meal recipes for various cuisines and dietary preferences. Whether you are looking for quick and easy meals, healthy options, or gourmet dishes, you will find a wide range of recipes to suit your needs. The goal is to make cooking enjoyable and accessible for everyone, regardless of their skill level in the kitchen.
+This application is designed to help users discover and manage meal recipes. It leverages the Flutter framework to provide a seamless and responsive user experience across both iOS and Android platforms.
 
-## Features
+## Techniques and Packages Used
 
-- A diverse collection of recipes from different cuisines
-- Detailed instructions and ingredient lists
-- Nutritional information for each recipe
-- Tips and tricks for cooking and meal preparation
-- User-friendly interface for browsing and searching recipes
+- **State Management**: The application uses the `provider` package for efficient state management.
+- **Networking**: The `http` package is utilized to fetch data from external APIs.
+- **Local Storage**: The `shared_preferences` package is used to store user preferences and favorite recipes locally.
+- **Navigation**: The `flutter_navigation` package is implemented for smooth and intuitive navigation between different screens.
+- **UI Components**: Custom widgets and the `flutter_svg` package are used to create a visually appealing interface.
 
-## Getting Started
+## Functionalities Implemented
 
-To get started with the Meal Recipes app, follow the instructions below:
+- **Recipe Search**: Users can search for recipes by ingredients or recipe names.
+- **Recipe Details**: Detailed information about each recipe, including ingredients, steps, and nutritional information.
+- **Favorites**: Users can save their favorite recipes for quick access.
+- **Categories**: Recipes are categorized for easy browsing.
+- **User Preferences**: Users can set dietary preferences and restrictions to filter recipes accordingly.
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/meal_recipes.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd meal_recipes
-    ```
-3. Install the dependencies:
-    ```bash
-    flutter pub get
-    ```
-4. Run the app:
-    ```bash
-    flutter run
-    ```
-
-Enjoy exploring and cooking delicious meals with the Meal Recipes app!
-
-TO DOO:
-- Add an API to load the recipes from so this is solid project
-- Add a loading screen
+This application aims to make meal planning and cooking easier and more enjoyable for users by providing a comprehensive and user-friendly platform.
