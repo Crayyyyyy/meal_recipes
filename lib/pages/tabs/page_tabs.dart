@@ -1,54 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meal_recipes/objects/meal.dart';
 import 'package:meal_recipes/pages/categories/page_categories.dart';
 import 'package:meal_recipes/pages/filters/page_filters.dart';
 import 'package:meal_recipes/pages/meals/page_meals.dart';
 import 'package:meal_recipes/pages/tabs/components/drawer_main.dart';
+import 'package:meal_recipes/providers/provider_favorites.dart';
+import 'package:meal_recipes/providers/provider_meals.dart';
 
-const Map<String, bool> kFilters = {
-  "Gluten-free": false,
-  "Lactose-free": false,
-  "Vegetarian": false,
-  "Vegan": false,
-};
-
-class PageTabs extends StatefulWidget {
+class PageTabs extends ConsumerStatefulWidget {
   const PageTabs({super.key});
 
   @override
-  State<PageTabs> createState() => _PageTabsState();
+  ConsumerState<PageTabs> createState() => _PageTabsState();
 }
 
-class _PageTabsState extends State<PageTabs> {
+class _PageTabsState extends ConsumerState<PageTabs> {
   int indexPage = 0;
-  List<Meal> favoriteMeals = [];
-  Map<String, bool> filters = kFilters;
 
-  void _pushSettings(BuildContext context) async {
+  void _pushSettings(BuildContext context) {
     Navigator.of(context).pop();
-    Map<String, bool> temp = await Navigator.of(context).push(
+    Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) {
-          return PageFilters(pageFilters: filters);
+          return PageFilters();
         },
       ),
     );
-    setState(() {
-      filters = temp;
-    });
-  }
-
-  void toggleFavoriteMeal(Meal meal) {
-    bool isInList = favoriteMeals.contains(meal);
-    if (isInList) {
-      setState(() {
-        favoriteMeals.remove(meal);
-      });
-    } else {
-      setState(() {
-        favoriteMeals.add(meal);
-      });
-    }
   }
 
   void _selectPage(int index) {
@@ -59,12 +37,13 @@ class _PageTabsState extends State<PageTabs> {
 
   @override
   Widget build(BuildContext context) {
-    Widget activePage =
-        PageCategories(onToggleFavorite: toggleFavoriteMeal, filters: filters);
+    Widget activePage = PageCategories();
+
     if (indexPage == 1) {
-      activePage = PageMeals.fromList(
-          meals: favoriteMeals, onToggleFavorite: toggleFavoriteMeal);
+      final mealsFavorite = ref.watch(provideFavoriteMeals);
+      activePage = PageMeals.fromList(meals: mealsFavorite);
     }
+
     return Scaffold(
       drawer: DrawerMain(
         parentRouteFunction: _pushSettings,

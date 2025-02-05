@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meal_recipes/data/data_dummy.dart';
 import 'package:meal_recipes/objects/category.dart';
-import 'package:meal_recipes/objects/meal.dart';
 import 'package:meal_recipes/pages/categories/components/card_category.dart';
 import 'package:meal_recipes/pages/meals/page_meals.dart';
+import 'package:meal_recipes/providers/provider_filters.dart';
 
-class PageCategories extends StatelessWidget {
-  PageCategories(
-      {super.key, required this.onToggleFavorite, required this.filters});
-
-  void Function(Meal meal) onToggleFavorite;
-  Map<String, bool> filters;
-
-  void _routeCategory(BuildContext context, Category category) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (ctx) => PageMeals.withFilters(
-          category: category,
-          onToggleFavorite: onToggleFavorite,
-          filters: filters,
-        ),
-      ),
-    );
-  }
+class PageCategories extends ConsumerWidget {
+  PageCategories({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final filters = ref.watch(provideFilters);
+
+    void _routeCategory(BuildContext context, Category category) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => PageMeals.withFilters(
+            category: category,
+            filters: filters,
+          ),
+        ),
+      );
+    }
+
     return CustomScrollView(
       slivers: [
         SliverAppBar(

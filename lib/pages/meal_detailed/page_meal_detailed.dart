@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meal_recipes/components/meal_item_detail.dart';
 import 'package:meal_recipes/objects/meal.dart';
+import 'package:meal_recipes/providers/provider_favorites.dart';
 
 class PageMealDetailed extends StatefulWidget {
-  PageMealDetailed(
-      {super.key, required this.meal, required this.onToggleFavorite});
+  PageMealDetailed({super.key, required this.meal});
 
   Meal meal;
-  void Function(Meal meal) onToggleFavorite;
+
   @override
   State<PageMealDetailed> createState() => _PageMealDetailedState();
 }
@@ -64,15 +65,7 @@ class _PageMealDetailedState extends State<PageMealDetailed> {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.favorite_border,
-                        color: Colors.white.withAlpha(127),
-                      ),
-                      onPressed: () {
-                        widget.onToggleFavorite(widget.meal);
-                      },
-                    )
+                    ButtonAddToFavorites(meal: widget.meal),
                   ],
                 ),
                 Row(
@@ -138,6 +131,25 @@ class _PageMealDetailedState extends State<PageMealDetailed> {
           backgroundColor: Colors.transparent,
         ),
       ),
+    );
+  }
+}
+
+class ButtonAddToFavorites extends ConsumerWidget {
+  ButtonAddToFavorites({super.key, required this.meal});
+
+  Meal meal;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return IconButton(
+      icon: Icon(
+        Icons.favorite_border,
+        color: Colors.white.withAlpha(127),
+      ),
+      onPressed: () {
+        ref.read(provideFavoriteMeals.notifier).toggleFavoriteMeal(meal);
+      },
     );
   }
 }
