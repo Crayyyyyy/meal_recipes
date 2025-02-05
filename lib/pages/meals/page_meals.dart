@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meal_recipes/objects/category.dart';
 import 'package:meal_recipes/objects/meal.dart';
 import 'package:meal_recipes/data/data_dummy.dart';
@@ -28,7 +27,7 @@ class PageMeals extends StatelessWidget {
 
   Map<String, bool>? filters;
   Category? category;
-  List<Meal> meals;
+  final List<Meal> meals;
 
   void _routeMeal(BuildContext context, Meal meal) {
     Navigator.of(context).push(
@@ -40,22 +39,76 @@ class PageMeals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget content = ListView.builder(
+      itemCount: meals.length,
+      itemBuilder: (ctx, index) {
+        final m = meals[index];
+        return CardMeal(
+          meal: m,
+          parentRouteFunction: () {
+            _routeMeal(context, meals[index]);
+          },
+        );
+      },
+    );
+    if (meals.length == 0) {
+      content = EmptySearch();
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(category == null ? "Favorites" : category!.title),
+        appBar: AppBar(
+          title: Text(category == null ? "Favorites" : category!.title),
+        ),
+        body: content);
+  }
+}
+
+class EmptySearch extends StatefulWidget {
+  const EmptySearch({super.key});
+
+  @override
+  State<EmptySearch> createState() => _EmptySearchState();
+}
+
+class _EmptySearchState extends State<EmptySearch>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+      lowerBound: 0,
+      upperBound: 1,
+    );
+    _animationController.repeat();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _animationController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animationController,
+      child: Container(
+        width: 200,
+        height: 300,
+        color: Colors.purpleAccent,
       ),
-      body: ListView.builder(
-        itemCount: meals.length,
-        itemBuilder: (ctx, index) {
-          final m = meals[index];
-          return CardMeal(
-            meal: m,
-            parentRouteFunction: () {
-              _routeMeal(context, meals[index]);
-            },
-          );
-        },
-      ),
+      builder: (context, child) {
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: Offset(0, 0.3),
+            end: Offset(0, 0),
+          ).animate(_animationController),
+        );
+      },
     );
   }
 }

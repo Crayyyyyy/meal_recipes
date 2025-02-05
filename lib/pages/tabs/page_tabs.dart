@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meal_recipes/objects/meal.dart';
 import 'package:meal_recipes/pages/categories/page_categories.dart';
 import 'package:meal_recipes/pages/filters/page_filters.dart';
 import 'package:meal_recipes/pages/meals/page_meals.dart';
 import 'package:meal_recipes/pages/tabs/components/drawer_main.dart';
 import 'package:meal_recipes/providers/provider_favorites.dart';
-import 'package:meal_recipes/providers/provider_meals.dart';
 
 class PageTabs extends ConsumerStatefulWidget {
   const PageTabs({super.key});

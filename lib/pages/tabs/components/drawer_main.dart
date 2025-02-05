@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:meal_recipes/pages/filters/page_filters.dart';
 
 class DrawerMain extends StatelessWidget {
-  DrawerMain({super.key, required this.parentRouteFunction});
+  const DrawerMain({super.key, required this.parentRouteFunction});
 
-  void Function(BuildContext context) parentRouteFunction;
+  final void Function(BuildContext context) parentRouteFunction;
 
   @override
   Widget build(BuildContext context) {

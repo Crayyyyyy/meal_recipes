@@ -5,9 +5,9 @@ import 'package:meal_recipes/objects/meal.dart';
 import 'package:meal_recipes/providers/provider_favorites.dart';
 
 class PageMealDetailed extends StatefulWidget {
-  PageMealDetailed({super.key, required this.meal});
+  const PageMealDetailed({super.key, required this.meal});
 
-  Meal meal;
+  final Meal meal;
 
   @override
   State<PageMealDetailed> createState() => _PageMealDetailedState();
@@ -91,14 +91,9 @@ class _PageMealDetailedState extends State<PageMealDetailed> {
                 Text("Ingredients",
                     style: Theme.of(context).textTheme.titleMedium),
                 for (String ingredient in widget.meal.ingredients)
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.remove,
-                        color: Colors.white.withAlpha(25),
-                      ),
-                      Text(ingredient),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Text(ingredient),
                   ),
                 SizedBox(height: 16),
                 Text("Steps", style: Theme.of(context).textTheme.titleMedium),
@@ -124,9 +119,12 @@ class _PageMealDetailedState extends State<PageMealDetailed> {
         preferredSize: Size.fromHeight(200.0), // Adjust the height as needed
         child: AppBar(
           elevation: 2,
-          flexibleSpace: Image.network(
-            widget.meal.imageUrl,
-            fit: BoxFit.cover,
+          flexibleSpace: Hero(
+            tag: widget.meal.id,
+            child: Image.network(
+              widget.meal.imageUrl,
+              fit: BoxFit.cover,
+            ),
           ),
           backgroundColor: Colors.transparent,
         ),
@@ -136,16 +134,26 @@ class _PageMealDetailedState extends State<PageMealDetailed> {
 }
 
 class ButtonAddToFavorites extends ConsumerWidget {
-  ButtonAddToFavorites({super.key, required this.meal});
+  const ButtonAddToFavorites({super.key, required this.meal});
 
-  Meal meal;
+  final Meal meal;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final mealsFavorite = ref.watch(provideFavoriteMeals);
+    final isMealFavorite = mealsFavorite.contains(meal);
+
     return IconButton(
-      icon: Icon(
-        Icons.favorite_border,
-        color: Colors.white.withAlpha(127),
+      icon: AnimatedSwitcher(
+        duration: Duration(milliseconds: 300),
+        child: Icon(
+          key: ValueKey(isMealFavorite),
+          isMealFavorite ? Icons.favorite : Icons.favorite_border,
+          color: isMealFavorite ? Colors.red : Colors.white.withAlpha(127),
+        ),
+        transitionBuilder: (child, animation) {
+          return FadeTransition(opacity: animation, child: child);
+        },
       ),
       onPressed: () {
         ref.read(provideFavoriteMeals.notifier).toggleFavoriteMeal(meal);

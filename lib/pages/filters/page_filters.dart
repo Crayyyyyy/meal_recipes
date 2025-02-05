@@ -2,16 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meal_recipes/providers/provider_filters.dart';
 
-class PageFilters extends ConsumerStatefulWidget {
+class PageFilters extends ConsumerWidget {
   const PageFilters({super.key});
-
   @override
-  ConsumerState<PageFilters> createState() => _PageFiltersState();
-}
-
-class _PageFiltersState extends ConsumerState<PageFilters> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final filters = ref.watch(provideFilters);
 
     return Scaffold(
@@ -24,9 +18,7 @@ class _PageFiltersState extends ConsumerState<PageFilters> {
             SwitchListTile(
               value: filter.value,
               onChanged: (isOn) {
-                setState(() {
-                  ref.read(provideFilters.notifier).setFilter(filter.key, isOn);
-                });
+                ref.read(provideFilters.notifier).setFilter(filter.key, isOn);
               },
               title: Text(
                 filter.key,

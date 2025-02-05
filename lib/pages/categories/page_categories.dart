@@ -7,13 +7,13 @@ import 'package:meal_recipes/pages/meals/page_meals.dart';
 import 'package:meal_recipes/providers/provider_filters.dart';
 
 class PageCategories extends ConsumerWidget {
-  PageCategories({super.key});
+  const PageCategories({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filters = ref.watch(provideFilters);
 
-    void _routeCategory(BuildContext context, Category category) {
+    void routeCategory(BuildContext context, Category category) {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (ctx) => PageMeals.withFilters(
@@ -101,7 +101,7 @@ class PageCategories extends ConsumerWidget {
                 return CardCategory(
                   category: cat,
                   parentRouteFunction: () {
-                    _routeCategory(context, cat);
+                    routeCategory(context, cat);
                   },
                 );
               },

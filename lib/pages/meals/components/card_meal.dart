@@ -4,10 +4,11 @@ import 'package:meal_recipes/objects/meal.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class CardMeal extends StatelessWidget {
-  CardMeal({super.key, required this.meal, required this.parentRouteFunction});
+  const CardMeal(
+      {super.key, required this.meal, required this.parentRouteFunction});
 
-  Meal meal;
-  void Function() parentRouteFunction;
+  final Meal meal;
+  final void Function() parentRouteFunction;
 
   String get complexityString {
     return meal.complexity.name[0].toUpperCase() +
@@ -33,12 +34,15 @@ class CardMeal extends StatelessWidget {
         onTap: parentRouteFunction,
         child: Stack(
           children: [
-            FadeInImage(
-              placeholder: MemoryImage(kTransparentImage),
-              image: NetworkImage(meal.imageUrl),
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
+            Hero(
+              tag: meal.id,
+              child: FadeInImage(
+                placeholder: MemoryImage(kTransparentImage),
+                image: NetworkImage(meal.imageUrl),
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
             Positioned(
               bottom: 0,
