@@ -1,10 +1,13 @@
 <p align="center">
+    <img src="assets/readme/screen-category.png" alt="Image 3" width="400"/>
+</p>
+<p align="center">
     <img src="assets/readme/screen-filters.png" alt="Image 1" width="200"/>
     <img src="assets/readme/screen-drawer.png" alt="Image 2" width="200"/>
-    <img src="assets/readme/screen-category.png" alt="Image 3" width="200"/>
     <img src="assets/readme/screen-meal.png" alt="Image 4" width="200"/>
     <img src="assets/readme/screen-meals.png" alt="Image 4" width="200"/>
 </p>
+
 
 # Meal Recipes Application
 
